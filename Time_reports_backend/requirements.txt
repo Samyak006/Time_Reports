@@ -4,3 +4,5 @@ python-tds
 pydantic[email]
 sqlmodel
 sqlalchemy-pytds
+authlib 
+httpx
