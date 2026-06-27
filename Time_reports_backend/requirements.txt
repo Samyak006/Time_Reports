@@ -1,0 +1,6 @@
+fastapi[standard]
+bcrypt
+python-tds
+pydantic[email]
+sqlmodel
+sqlalchemy-pytds
