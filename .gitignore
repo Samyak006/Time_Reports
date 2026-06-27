@@ -1,3 +1,2 @@
-./Time_reports_backend/.env
-./Time_reports_app/.env
-./.env
+Time_reports_backend/.env
+.env
