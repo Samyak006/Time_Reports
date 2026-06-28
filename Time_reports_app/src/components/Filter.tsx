@@ -29,12 +29,14 @@ export default function FilterComponent(
     }
         return (
             <>
-                <Dropdown options={timekeepers} setFilter={setTimekeeper} />
-                <Dropdown options={clients} setFilter={setClientId} />
-                <Dropdown options={matters} setFilter={setMatterId} />
-                <input type="date" placeholder='Work Date From' onChange={(e)=>setWorkDateFrom(e.target.value)} />
-                <input type="date" placeholder='Work Date To' onChange={(e)=>setWorkDateTo(e.target.value)}/>
-                <button onClick={handleApplyFilter}> Apply Filters </button> 
+                <div className="flex justify-center-safe">
+                    <Dropdown options={timekeepers} setFilter={setTimekeeper} />
+                    <Dropdown options={clients} setFilter={setClientId} />
+                    <Dropdown options={matters} setFilter={setMatterId} />
+                    <input type="date" placeholder='Work Date From' onChange={(e)=>setWorkDateFrom(e.target.value)} />
+                    <input type="date" placeholder='Work Date To' onChange={(e)=>setWorkDateTo(e.target.value)}/>
+                    <button onClick={handleApplyFilter}> Apply Filters </button> 
+                </div>
             </>
         );
     }

@@ -1,5 +1,6 @@
 
-import Filters from '../components/Filter';
+import Filter from '../components/Filter';
+import Navbar from '../components/Navbar';
 import { useState } from 'react';
 
 export default function ReportPage() {
@@ -8,14 +9,16 @@ export default function ReportPage() {
     const [matters] = useState<string[]>(["001-001", "001-002", "002-001"]);
     return (
       <>
-        <h1>Reports</h1>
-        {/* the timekeepers, clients and matters should be fetched from the backend and passed to the Filters component as props (create a hook for these values) */}
-        <Filters 
+        <div className='px-50 my-5'>
+          <Navbar/>
+          {/* the timekeepers, clients and matters should be fetched from the backend and passed to the Filters component as props (create a hook for these values) */}
+          <Filter
             timekeepers={timekeepers}
             clients={clients}
             matters={matters}
-        />
-        <div>Preview</div>
+          />
+          <div>Preview</div>
+        </div>
       </>
   );
 }
