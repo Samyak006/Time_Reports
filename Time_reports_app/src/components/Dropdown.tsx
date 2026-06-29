@@ -1,4 +1,5 @@
 import type React from "react";
+import { useState } from "react";
 
 export interface IDropdownProps {
     options: string[];
@@ -6,13 +7,28 @@ export interface IDropdownProps {
 }
 
 export default function Dropdown ({options, setFilter}: IDropdownProps) {
+  const [dropdownList, setDropdownList] = useState<string[]>([...options]);
+  const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false)
+  const [inputValue, setInputValue] = useState<string>('')
+  const onChangeHandler =(e:React.ChangeEvent<HTMLInputElement>):void => {
+    e.preventDefault()
+    setInputValue(e.target.value)
+    setDropdownList(options.filter(str => str.includes(e.target.value)))
+  }
+  const onClickBtnHandler=(e:React.MouseEvent<HTMLButtonElement>):void =>{
+    e.preventDefault()
+    setFilter(e.currentTarget.value)
+    setInputValue(e.currentTarget.value)
+    setIsDropdownVisible(false)
+  }
   return (
     <>
-        <select onChange={(e)=> setFilter(e.currentTarget.value)}>
-            {options.map((option, index) => (
-                <option key={index} value={option}>{option}</option>
+        <div className=" flex flex-col">
+          <input className=" border rounded" placeholder="Filter values" onClick={()=> setIsDropdownVisible(prev=>!prev)} onChange={(e)=>onChangeHandler(e)} value={inputValue}/>
+            {isDropdownVisible && dropdownList.map((option, index)=>(          
+              <button className="border rounded" key={index} value={option} onClick={(e)=>onClickBtnHandler(e)}>{option}</button>
             ))}
-        </select>
+        </div>
     </>
   );
 }
