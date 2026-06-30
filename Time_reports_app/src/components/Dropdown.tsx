@@ -2,11 +2,12 @@ import type React from "react";
 import { useState, useRef, useEffect } from "react";
 
 export interface IDropdownProps {
+  styles: string;
   options: string[];
   setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Dropdown({ options, setFilter }: IDropdownProps) {
+export default function Dropdown({ styles, options, setFilter }: IDropdownProps) {
   const [dropdownList, setDropdownList] = useState<string[]>([...options]);
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
@@ -39,9 +40,10 @@ export default function Dropdown({ options, setFilter }: IDropdownProps) {
 
   return (
     <>
+    <div className={`${styles} relative px-30`}>
       <div
         ref={dropdownRef} 
-        className="dropdown flex flex-col">
+        className="absolute left-0">
         <input
           className="border rounded"
           placeholder="Filter values"
@@ -49,6 +51,7 @@ export default function Dropdown({ options, setFilter }: IDropdownProps) {
           onChange={(e) => onChangeHandler(e)}
           value={inputValue}
         />
+        <div className="flex flex-col overflow-y-auto">
         {isDropdownVisible &&
           dropdownList.map((option, index) => (
             <button
@@ -60,6 +63,8 @@ export default function Dropdown({ options, setFilter }: IDropdownProps) {
               {option}
             </button>
           ))}
+          </div>
+      </div>
       </div>
     </>
   );

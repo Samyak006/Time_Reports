@@ -1,13 +1,15 @@
 import Dropdown from "./Dropdown";
 import {useState} from "react";
 export interface IfilterProps {
+    styles:string;
     timekeepers: string[];
     clients: string[];
     matters: string[];
 }
 
 export default function FilterComponent(
-                                        {
+                                        {   
+                                            styles,
                                             timekeepers,
                                             clients,
                                             matters,
@@ -29,13 +31,13 @@ export default function FilterComponent(
     }
         return (
             <>
-                <div className="flex justify-center-safe">
-                    <Dropdown options={timekeepers} setFilter={setTimekeeper} />
-                    <Dropdown options={clients} setFilter={setClientId} />
-                    <Dropdown options={matters} setFilter={setMatterId} />
-                    <input type="date" placeholder='Work Date From' onChange={(e)=>setWorkDateFrom(e.target.value)} />
-                    <input type="date" placeholder='Work Date To' onChange={(e)=>setWorkDateTo(e.target.value)}/>
-                    <button onClick={handleApplyFilter}> Apply Filters </button> 
+                <div className={`${styles} flex flex-row justify-center-safe`}>
+                    <Dropdown styles="" options={timekeepers} setFilter={setTimekeeper} />
+                    <Dropdown styles="" options={clients} setFilter={setClientId} />
+                    <Dropdown styles="" options={matters} setFilter={setMatterId} />
+                    <div><input type="date" placeholder='Work Date From' onChange={(e)=>setWorkDateFrom(e.target.value)} /></div>
+                    <div><input type="date" placeholder='Work Date To' onChange={(e)=>setWorkDateTo(e.target.value)}/></div>
+                    <div><button onClick={handleApplyFilter}> Apply Filters </button></div>
                 </div>
             </>
         );
