@@ -12,11 +12,12 @@ export default function ReportPage() {
         <div className='px-50 my-5'>
           <Navbar/>
           {/* the timekeepers, clients and matters should be fetched from the backend and passed to the Filters component as props (create a hook for these values) */}
-          <Filter
-            timekeepers={timekeepers}
-            clients={clients}
-            matters={matters}
-          />
+            <Filter
+              styles="my-2.5"
+              timekeepers={timekeepers}
+              clients={clients}
+              matters={matters}
+            />
           <div>Preview</div>
         </div>
       </>
