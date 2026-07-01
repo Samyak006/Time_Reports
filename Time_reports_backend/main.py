@@ -30,8 +30,8 @@ async def timekeepers(client: Annotated[AsyncOAuth2Client, Depends(get_oauth2_to
 
 @app.get("/clients")
 async def matters(client: Annotated[AsyncOAuth2Client, Depends(get_oauth2_token)]):
-	return await get_matters(client) 
+	return await get_clients(client) 
 
 @app.get("/matters")
 async def clients(client: Annotated[AsyncOAuth2Client, Depends(get_oauth2_token)]):
-	return await get_clients(client) 
+	return await get_matters(client) 
