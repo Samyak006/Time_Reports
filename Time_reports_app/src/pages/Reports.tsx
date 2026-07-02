@@ -1,14 +1,23 @@
 
 import Filter from '../components/Filter';
 import Navbar from '../components/Navbar';
-import { useState } from 'react';
-import onPageLoad from '../hooks/onPageLoad'
+import { useState, useEffect } from 'react';
+import api from '../hooks/api'
+import type ITimekeeper from '../Interface/Itimekeeper';
+import type IClient from '../Interface/IClient';
+import type IMatter from '../Interface/IMatter';
 
 export default function ReportPage() {
-    const [timekeepers] = useState<string[]>(["John Doe", "Jane Smith", "Bob Johnson"]);
-    const [clients] = useState<string[]>(["001", "002", "003"]);
-    const [matters] = useState<string[]>(["001-001", "001-002", "002-001"]);
+    const [timekeepers, setTimekeepers] = useState<ITimekeeper[]>([]);
+    const [clients, setClients] = useState<IClient[]>([]);
+    const [matters, setMatters] = useState<IMatter[]>([]);
     
+    useEffect(()=>{
+      api.get("timekeepers").then((response)=>setTimekeepers(response.data)).catch((e)=>console.log(e))
+      api.get("clients").then((response)=>setClients(response.data)).catch((e)=>console.log(e))
+      api.get("matters").then((response)=>setMatters(response.data)).catch((e)=>console.log(e))
+    }, []);
+
     return (
       <>
         <div className='px-50 my-5'>
@@ -20,7 +29,6 @@ export default function ReportPage() {
               clients={clients}
               matters={matters}
             />
-            <button onClick={onPageLoad}>click me</button>
           <div>Preview</div>
         </div>
       </>

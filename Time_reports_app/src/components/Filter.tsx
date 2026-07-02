@@ -1,10 +1,16 @@
-import Dropdown from "./Dropdown";
+import type IClient from "../Interface/IClient";
+import type IMatter from "../Interface/IMatter";
+import type ITimekeeper from "../Interface/Itimekeeper";
+import TimekeeperDropdown from "./TimekeeperDropdown"
+import ClientDropdown from "./ClientDropdown"
+import MatterDropdown from "./MatterDropdown"
 import {useState} from "react";
+
 export interface IfilterProps {
     styles:string;
-    timekeepers: string[];
-    clients: string[];
-    matters: string[];
+    timekeepers: ITimekeeper[];
+    clients: IClient[];
+    matters: IMatter[];
 }
 
 export default function FilterComponent(
@@ -32,9 +38,9 @@ export default function FilterComponent(
         return (
             <>
                 <div className={`${styles} flex flex-row justify-center-safe`}>
-                    <Dropdown styles="" options={timekeepers} setFilter={setTimekeeper} />
-                    <Dropdown styles="" options={clients} setFilter={setClientId} />
-                    <Dropdown styles="" options={matters} setFilter={setMatterId} />
+                    <TimekeeperDropdown styles="" options={timekeepers} setFilter={setTimekeeper} />
+                    <ClientDropdown styles="" options={clients} setFilter={setClientId} />
+                    <MatterDropdown styles="" options={matters} setFilter={setMatterId} />
                     <div><input type="date" placeholder='Work Date From' onChange={(e)=>setWorkDateFrom(e.target.value)} /></div>
                     <div><input type="date" placeholder='Work Date To' onChange={(e)=>setWorkDateTo(e.target.value)}/></div>
                     <div><button onClick={handleApplyFilter}> Apply Filters </button></div>
